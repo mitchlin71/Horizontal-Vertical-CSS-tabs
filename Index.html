@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Horizontal & Vertical CSS tabs</title>
+    <meta charset="UTF-8">
+    <style>
+        /*Begin styling horizontal tabs*/
+        body {
+            background: #c1c1c1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            position: fixed;
+            width: 800px;
+            top: -1px;
+            word-wrap: break-word;
+        }
+
+        h1 {
+            color: #000;
+            text-align: left;
+            font-size: 2em
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline
+        }
+
+        .tab {
+            cursor: pointer;
+            padding: 10px 20px;
+            margin: 0;
+            background: #000;
+            display: inline-block;
+            color: #fff;
+            border-radius: 3px 3px;
+        }
+        /*Begin of styling panels*/
+        .panels {
+            background: #fffffff6;
+            box-shadow: 60px 2rem 1rem #000;
+            min-height: 600px;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 3px;
+            overflow: hidden;
+            padding: 20px
+        }
+
+        .panel {
+            display: none;
+            animation: fadein .8s;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            font-weight: bold
+        }
+
+        .radio {
+            display: none
+        }
+
+        #one:checked~.panels #one-panel,
+        #three:checked~.panels #three-panel,
+        #two:checked~.panels #two-panel {
+            display: block
+        }
+
+        #one:checked~.tabs #one-tab,
+        #three:checked~.tabs #three-tab,
+        #two:checked~.tabs #two-tab {
+            background: #fff;
+            color: #000;
+            border-top: 3px solid #000
+        }
+        /*Begin of styling vertical tabs*/
+        .tabs-container {
+            position: relative;
+            background: #2652cc;
+            width: 120px;
+            height: auto;
+            float: left;
+            z-index: auto;
+            margin-top: -20px;
+            margin-left: -20px;
+        }
+
+        .tabs-container label {
+            position: relative;
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, .1);
+            display: block;
+            font-size: 13px;
+            color: #fff;
+            cursor: pointer;
+            user-select: none
+        }
+
+        .tabs-container label:hover {
+            background: rgba(0, 0, 0, .2)
+        }
+
+        .tab-content {
+            position: relative;
+            background: #fff;
+            width: calc(100% - 120px);
+            /*was: min-content*/
+            min-height: auto;
+            /*original: 100vh*/
+            padding: 15px;
+            float: left;
+            box-sizing: border-box;
+            z-index: auto;
+            display: none;
+            word-wrap: break-word;
+        }
+
+        .tab-content:after {
+            content: "";
+            clear: both;
+        }
+
+        input[name=tab],
+        input[name=tab2],
+        input[name=tab3] {
+            display: none
+        }
+
+        input[name=tab]:checked+.tab-content,
+        input[name=tab2]:checked+.tab-content,
+        input[name=tab3]:checked+.tab-content {
+            display: block;
+            animation: slide 0.5s forwards;
+        }
+
+        @keyframes slide {
+            from {
+                left: -100%;
+                opacity: 0;
+            }
+
+            to {
+                left: 0;
+                opacity: 1;
+            }
+        }
+
+        /*Begin content styling*/
+        p {
+            line-height: .5;
+            padding: 0;
+            text-indent: 0;
+            word-wrap: break-word;
+        }
+
+        th {
+            text-align: left;
+            background: #bbb;
+            font-size: 15px
+        }
+
+        td {
+            font-size: 14px;
+            padding: 2px
+        }
+
+        .lite-derefer {
+            position: relative;
+            font-style: italic;
+            font-size: 0.5rem;
+            max-width: 90%;
+        }
+
+        .risk {
+            line-height: 1.5;
+            padding: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-indent: 0;
+            text-align: center;
+            color: red
+        }
+
+        .safe {
+            line-height: 1.5;
+            padding: 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-indent: 0;
+            text-align: center;
+            color: green
+        }
+
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            margin-top: 0;
+            margin-bottom: -15px;
+            padding: 0;
+            max-width: 800px
+        }
+
+        .help {
+            text-decoration: underline dotted;
+            cursor: help;
+            top: -13px;
+            color: red;
+            font-style: italic;
+            font-size: 1.5rem;
+            max-width: 90%;
+        }
+
+        .lite {
+            max-width: 75%;
+            line-height: 1.5;
+            padding: 0;
+            text-indent: 0;
+
+        }
+    </style>
+</head>
+
+<body>
+    <!--Begin Horizontal Header Tabs-->
+    <div class="wrapper">
+        <input class="radio" id="one" name="group" type="radio" checked>
+        <input class="radio" id="two" name="group" type="radio">
+        <input class="radio" id="three" name="group" type="radio">
+        <div class="tabs">
+            <label class="tab" id="one-tab" for="one">Horizontal Header Tab 1</label>
+            <label class="tab" id="two-tab" for="two">Horizontal Header Tab 2</label>
+            <label class="tab" id="three-tab" for="three">Horizontal Header Tab 3</label>
+        </div>
+        <!--End Horizontal Header Tabs-->
+        <!--Begin Panels-->
+        <div class="panels">
+            <!--Begin Panel 1-->
+            <div class="panel" id="one-panel">
+                <!--Begin Vertical Tab 1.1-->
+                <section class="tabs-container">
+                    <label for="vertical-tab-1.1">Vertical Tab 1.1</label>
+                </section>
+                <input name="tab" id="vertical-tab-1.1" type="radio" checked>
+
+                <section class="tab-content">
+                    <h1>Vertical Tab 1.1</h1>
+                    <hr>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi necessitatibus illum unde aliquid
+                    asperiores expedita, ut excepturi tenetur itaque tempore provident, molestias alias vero, tempora
+                    veniam nisi aut ab facere.
+                </section>
+                <!--Begin Vertical Tab 1.1-->
+            </div>
+            <!--End Panel 1-->
+            <!--Begin Panel 2-->
+            <div class="panel" id="two-panel">
+                <!--Begin Vertical Tab 2.1-->
+                <section class="tabs-container">
+                    <label for="vertical-tab-2.1">Vertical Tab 2.1</label>
+                </section>
+                <input name="tab2" id="vertical-tab-2.1" type="radio" checked>
+                <section class="tab-content">
+                    <h1>Vertical Tab 2.1</h1>
+                    <hr>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam dolorem libero obcaecati nemo
+                    ducimus adipisci dolorum eum saepe maiores recusandae architecto, alias aut accusantium id, at porro
+                    non ipsa praesentium.
+                </section>
+                <!--End Vertical Tab 2.1-->
+            </div>
+            <!--End Panel 2-->
+            <!--Begin Panel 3-->
+            <div class="panel" id="three-panel">
+                <!--Begin Vertical Tab 3.1-->
+                <section class="tabs-container">
+                    <label for="vertical-tab-3.1">Vertical Tab 3.1</label>
+                </section>
+                <input name="tab3" id="vertical-tab-3.1" type="radio" checked>
+                <section class="tab-content">
+                    <h1>Vertical Tab 3.1</h1>
+                    <hr>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit a expedita, ullam laboriosam
+                    reiciendis rerum dolorum. Saepe reprehenderit ipsam amet iusto modi quibusdam at blanditiis,
+                    architecto repellat fuga, sequi placeat!
+                </section>
+                <!--End Vertical Tab 3.1-->
+            </div>
+            <!--End Panel 3-->
+        </div>
+        <!--End Panels-->
+    </div>
+</body>
+
+</html>
